@@ -10,8 +10,7 @@ from tkinter .simpledialog import askstring
 # Screen Settings
 win = Tk()
 win.title("Dice Game (KGD)")
-win.geometry('630x550+200+200')
-win.resizable(False,False)
+win.geometry('1260x1010+300+0')
 win.iconbitmap(default = 'images/logo.ico')
 
 point = int(askstring("MONEY", '        보유 중인 잔액을 입력해주세요           '))
@@ -26,57 +25,57 @@ MAX = 100000000000 # 배팅 최고 포인트
 ########################################################################
 # Point, Bat Point, Games Frame
 curr_frame = Frame(win)
-curr_frame.grid(row = 0, column = 0, padx = (5,0), pady = (10, 0))
+curr_frame.grid(row = 0, column = 0, padx = (20,0), pady = (20, 0))
 
 # Select, Console Frame
 result_frame = Frame(win)
-result_frame.grid(row = 1, column = 0, padx = (5,0), pady = (10, 0))
+result_frame.grid(row = 1, column = 0, padx = (10,0), pady = (20, 0))
 
 # Dice Frame
 img_frame = Frame(win)
-img_frame.grid(row = 2, column = 0, padx = (15,0), pady = (10, 0))
+img_frame.grid(row = 2, column = 0, padx = (30,0), pady = (20, 0))
 
 # Button Frame
 play_frame = Frame(win)
-play_frame.grid(row = 3, column = 0, pady = (25, 0))
+play_frame.grid(row = 3, column = 0, pady = (30, 0))
 ########################################################################
 
 # Point Frame Section
 ###########################################################
 point_all = Label(curr_frame,
-    text = '잔액', font = 'Dotum 16 bold',
+    text = '잔액(만원)', font = 'Dotum 16 bold',
     bg = 'lightgray',
-    padx = 5,
+    padx = 10, height = 2, 
     highlightbackground = "gray",
-    highlightthickness = 1
+    highlightthickness = 2
     )
 R_W = Label(curr_frame,
-    text = "{}".format(point), font = "Dotum 16 bold",
-    width = 10, height = 1,
+    text = "{}".format(point), font = "Dotum 32 bold",
+    width = 7, height = 1,
     highlightbackground = "gray",
-    highlightthickness = 1
+    highlightthickness = 2
     )
-point_all.grid(row = 0, column = 0, pady = (5, 5))
-R_W.grid(row = 0, column = 1, pady = (5,5))
+point_all.grid(row = 0, column = 0, pady = (10,10))
+R_W.grid(row = 0, column = 1, pady = (10,10))
 ############################################################
 
 # Bat Point Section
 #########################################################################
 point_bat = Label(curr_frame,
-    text = '배팅', font = 'Dotum 16 bold',
+    text = '배팅(만원)', font = 'Dotum 16 bold',
     bg = 'lightgray',
-    padx = 5,
+    padx = 10, height = 2,
     highlightbackground = "gray",
-    highlightthickness = 1
+    highlightthickness = 2
     )
 B_W = Entry(curr_frame,
-    font = "Dotum 16 bold",
-    width = 10,
+    font = "Dotum 32 bold",
+    width = 18,
     highlightbackground = "gray",
-    highlightthickness = 1
+    highlightthickness = 2
     )
-point_bat.grid(row = 0, column = 2, padx = (10,0), pady = (5, 5))
-B_W.grid(row = 0, column = 3, pady = (5,5))
+point_bat.grid(row = 0, column = 2, padx = (20,0), pady = (10,10))
+B_W.grid(row = 0, column = 3, pady = (10,10))
 B_W.insert(0, "0")
 ########################################################################
 
@@ -85,17 +84,17 @@ B_W.insert(0, "0")
 games = Label(curr_frame,
     text = '판수', font = 'Dotum 16 bold',
     bg = 'lightgray',
-    padx = 5,
+    padx = 5, height = 2,
     highlightbackground = "gray",
-    highlightthickness = 1
+    highlightthickness = 2
     )
 G_W = Label(curr_frame,
-    text = "0", font = "Dotum 16 bold",
+    text = "0", font = "Dotum 32 bold",
     width = 5,
     highlightbackground = "gray",
-    highlightthickness = 1
+    highlightthickness = 2
     )
-games.grid(row = 0, column = 4, padx = (85,0), pady = (5, 5))
+games.grid(row = 0, column = 4, padx = (55,0), pady = (5, 5))
 G_W.grid(row = 0, column = 5, pady = (5,5))
 ########################################################################
 
@@ -104,17 +103,17 @@ G_W.grid(row = 0, column = 5, pady = (5,5))
 typ = IntVar()
 
 # odd, even, double CheckBox
-ODD = Radiobutton(result_frame, text = "홀수", variable = typ, value = 0)
-EVEN = Radiobutton(result_frame, text = "짝수", variable = typ, value = 1)
-DOUB = Radiobutton(result_frame, text = "더블", variable = typ, value = 2)
+ODD = Radiobutton(result_frame, text = "홀수", variable = typ, value = 0, font = "Dotum 24 bold", height = 2)
+EVEN = Radiobutton(result_frame, text = "짝수", variable = typ, value = 1, font = "Dotum 24 bold", height = 2)
+DOUB = Radiobutton(result_frame, text = "더블", variable = typ, value = 2, font = "Dotum 24 bold", height = 2)
 
 ODD.grid(row = 0, column = 0)
 EVEN.grid(row = 1, column = 0)
 DOUB.grid(row = 2, column = 0)
 
 Result = Text(result_frame,
-    font = "Dotum 12 bold",
-    width = 60, height = 7,
+    font = "Dotum 24 bold",
+    width = 50, height = 7,
     highlightbackground = "gray",
     highlightthickness = 1
     )
@@ -123,13 +122,13 @@ Result.grid(row = 0, column = 1, rowspan= 3, padx = (10,0), pady = (0,0))
 
 # DiceImage Sets
 ############################################################################
-dice0 = PhotoImage(file = "images/white.png").zoom(5)
-dice1 = PhotoImage(file = "images/dice_1.png").zoom(5)
-dice2 = PhotoImage(file = "images/dice_2.png").zoom(5)
-dice3 = PhotoImage(file = "images/dice_3.png").zoom(5)
-dice4 = PhotoImage(file = "images/dice_4.png").zoom(5)
-dice5 = PhotoImage(file = "images/dice_5.png").zoom(5)
-dice6 = PhotoImage(file = "images/dice_6.png").zoom(5)
+dice0 = PhotoImage(file = "images/white.png").zoom(10)
+dice1 = PhotoImage(file = "images/dice_1.png").zoom(10)
+dice2 = PhotoImage(file = "images/dice_2.png").zoom(10)
+dice3 = PhotoImage(file = "images/dice_3.png").zoom(10)
+dice4 = PhotoImage(file = "images/dice_4.png").zoom(10)
+dice5 = PhotoImage(file = "images/dice_5.png").zoom(10)
+dice6 = PhotoImage(file = "images/dice_6.png").zoom(10)
 
 DICE1 = Label(img_frame, image = dice0)
 DICE2 = Label(img_frame, image = dice0)
@@ -259,7 +258,7 @@ play = Button(play_frame,
     font = "Dotum 16 bold",
     bg = "gray",
     fg = "white",
-    height = 2,
+    width = 20, height = 3,
     command = roll,
     state = NORMAL
     )
