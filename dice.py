@@ -5,6 +5,7 @@
 # Modules
 import random as r
 from tkinter import *
+from tkinter .simpledialog import askstring
 
 # Screen Settings
 win = Tk()
@@ -13,9 +14,13 @@ win.geometry('630x550+200+200')
 win.resizable(False,False)
 win.iconbitmap(default = 'images/logo.ico')
 
+point = int(askstring("POINT", '        자신의 포인트를 입력해주세요           '))
+
 # Important Variable
-point = 100
-game = 0
+double_b = 4 # 더블 배수
+game = 0 
+MIN = 1 # 배팅 최소 포인트 
+MAX = 100000000000 # 배팅 최고 포인트
 
 # Frame Sets
 ########################################################################
@@ -170,13 +175,13 @@ def shuf2():
 def roll():
     global point, game
     bat_p = B_W.get()
-    if int(bat_p) < 10:
+    if int(bat_p) < MIN:
         Result.delete("1.0", END)
-        Result.insert(END, "배팅은 최소 10포인트만 가능합니다.\n\n\n\n\n")
+        Result.insert(END, "배팅은 최소 {}포인트만 가능합니다.\n\n\n\n\n".format(MIN))
         game = int(game) - 1
-    elif int(bat_p) > 50:
+    elif int(bat_p) > MAX:
         Result.delete("1.0", END)
-        Result.insert(END, "배팅은 최대 50포인트만 가능합니다.\n\n\n\n\n")
+        Result.insert(END, "배팅은 최대 {}포인트만 가능합니다.\n\n\n\n\n".format(MAX))
         game = int(game) - 1
     else:
         if int(bat_p) > point:
@@ -228,7 +233,7 @@ def roll():
             elif opt == 2:
                 if shuf_t1 == shuf_t2:
                     Result.insert(END, "합은 {}로 {}포인트를 얻었습니다.".format(shuf_l, bat_p))
-                    point = point + (5 * int(bat_p))
+                    point = point + (double_b * int(bat_p))
                 elif shuf_t1 != shuf_t2:
                     Result.insert(END, "합은 {}로 {}포인트를 잃었습니다.".format(shuf_l, bat_p))
                     point = point - int(bat_p)
@@ -242,6 +247,10 @@ def roll():
     R_W.config(text = point)
     game = int(game) + 1
     G_W.config(text = str(game))
+
+    if game < 0:
+        R_W.delete("1.0", END)
+        R_W.insert("버그가 발생했습니다. \n재시작하려면 프로그램을 다시 실행해주세요.")
 
 # Roll Btn Frame Section
 ############################################################################
@@ -259,7 +268,7 @@ play.grid(row = 0, column = 0, padx = (0,0))
 
 # Console Default Message
 Result.delete("1.0", END)
-Result.insert(END, "위에 배팅할 포인트를 입력하시고 왼쪽의 배팅 항목을 선택 후,\n아래 굴리기 버튼을 눌러주세요.\n두 주사위의 눈의 합을 예측하는 게임입니다.\n(배율: 홀/짝 - 2배, 더블 - 5배)\n\n부주의로 인해 포인트를 잃는 것을 방지하기 위해 천천히 신중하게 \n게임해주세요.")
+Result.insert(END, "위에 배팅할 포인트를 입력하시고 왼쪽의 배팅 항목을 선택 후,\n아래 굴리기 버튼을 눌러주세요.\n두 주사위의 눈의 합을 예측하는 게임입니다.\n(배율: 홀/짝 - 2배, 더블 - {}배)\n\n부주의로 인해 포인트를 잃는 것을 방지하기 위해 천천히 신중하게 \n게임해주세요.".format(double_b))
 
 win.mainloop()
 # 고간디
