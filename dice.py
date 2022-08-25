@@ -14,7 +14,7 @@ win.geometry('630x550+200+200')
 win.resizable(False,False)
 win.iconbitmap(default = 'images/logo.ico')
 
-point = int(askstring("POINT", '        자신의 포인트를 입력해주세요           '))
+point = int(askstring("MONEY", '        보유 중인 잔액을 입력해주세요           '))
 
 # Important Variable
 double_b = 4 # 더블 배수
@@ -44,7 +44,7 @@ play_frame.grid(row = 3, column = 0, pady = (25, 0))
 # Point Frame Section
 ###########################################################
 point_all = Label(curr_frame,
-    text = '포인트', font = 'Dotum 16 bold',
+    text = '잔액', font = 'Dotum 16 bold',
     bg = 'lightgray',
     padx = 5,
     highlightbackground = "gray",
@@ -177,16 +177,16 @@ def roll():
     bat_p = B_W.get()
     if int(bat_p) < MIN:
         Result.delete("1.0", END)
-        Result.insert(END, "배팅은 최소 {}포인트만 가능합니다.\n\n\n\n\n".format(MIN))
+        Result.insert(END, "배팅은 최소 {}만원만 가능합니다.\n\n\n\n\n".format(MIN))
         game = int(game) - 1
     elif int(bat_p) > MAX:
         Result.delete("1.0", END)
-        Result.insert(END, "배팅은 최대 {}포인트만 가능합니다.\n\n\n\n\n".format(MAX))
+        Result.insert(END, "배팅은 최대 {}만원만 가능합니다.\n\n\n\n\n".format(MAX))
         game = int(game) - 1
     else:
         if int(bat_p) > point:
             Result.delete("1.0", END)
-            Result.insert(END, "포인트가 부족합니다.")
+            Result.insert(END, "잔액이 부족합니다.")
             game = int(game) - 1
         else:
             B_W.delete(0, END)
@@ -212,35 +212,35 @@ def roll():
 
             if opt == 0:
                 if shuf % 2 == 0:
-                    Result.insert(END, "합은 {}로 {}포인트를 잃었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 잃었습니다.".format(shuf_l, bat_p))
                     point = point - int(bat_p)
                 elif shuf % 2 == 1:
-                    Result.insert(END, "합은 {}로 {}포인트를 얻었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 얻었습니다.".format(shuf_l, bat_p))
                     point = point + int(bat_p)
                 elif shuf_t1 == shuf_t2:
-                    Result.insert(END, "합은 {}로 {}포인트를 잃었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 잃었습니다.".format(shuf_l, bat_p))
                     point = point - int(bat_p)
             elif opt == 1:
                 if shuf % 2 == 0 and shuf_t1 != shuf_t2:
-                    Result.insert(END, "합은 {}로 {}포인트를 얻었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 얻었습니다.".format(shuf_l, bat_p))
                     point = point + int(bat_p)
                 elif shuf % 2 == 1:
-                    Result.insert(END, "합은 {}로 {}포인트를 잃었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 잃었습니다.".format(shuf_l, bat_p))
                     point = point - int(bat_p)
                 elif shuf_t1 == shuf_t2:
-                    Result.insert(END, "합은 {}로 {}포인트를 잃었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 잃었습니다.".format(shuf_l, bat_p))
                     point = point - int(bat_p)
             elif opt == 2:
                 if shuf_t1 == shuf_t2:
-                    Result.insert(END, "합은 {}로 {}포인트를 얻었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 얻었습니다.".format(shuf_l, bat_p))
                     point = point + (double_b * int(bat_p))
                 elif shuf_t1 != shuf_t2:
-                    Result.insert(END, "합은 {}로 {}포인트를 잃었습니다.".format(shuf_l, bat_p))
+                    Result.insert(END, "합은 {}로 {}만원을 잃었습니다.".format(shuf_l, bat_p))
                     point = point - int(bat_p)
     if point == 0:
         play.config(state = DISABLED)
         Result.delete("1.0", END)
-        Result.insert(END, "포인트를 모두 잃었습니다. \n재시작하려면 프로그램을 다시 실행해주세요.")
+        Result.insert(END, "돈을 모두 잃었습니다. \n재시작하려면 프로그램을 다시 실행해주세요.")
         play.config(state = DISABLED)
 
 
